@@ -1,0 +1,44 @@
+.container {
+  --highlight-width: auto;
+  --highlight-x-pos: 0;
+
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.controls {
+  display: flex;
+  @apply h-fit;
+  @apply flex-nowrap;
+  @apply items-center;
+  @apply gap-2;
+  @apply rounded-full;
+  @apply bg-zinc-100;
+  @apply p-1;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.controls::before {
+  @apply bg-white;
+  @apply border;
+  @apply border-solid;
+  @apply border-gray-200;
+  @apply inline-block;
+  @apply rounded-full;
+
+  content: '';
+  width: var(--highlight-width);
+  transform: translateX(var(--highlight-x-pos));
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  z-index: 0;
+
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease;
+}
