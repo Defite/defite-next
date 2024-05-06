@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { NavMenu } from '@/components/NavMenu';
+import { Header } from '@/components/Header';
+import { ThemeProvider } from '@/theme/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,8 +19,15 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <NavMenu />
-        {children}
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

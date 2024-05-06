@@ -1,3 +1,5 @@
+'use client';
+
 import cn from 'classnames';
 import Link from 'next/link';
 import { FC, useEffect, useRef, useState } from 'react';
@@ -9,19 +11,16 @@ type Item = {
 };
 
 type Props = {
-  defaultItemIndex?: number;
+  activeIndex: number;
   items: Item[];
-  pathname?: string;
+  onClick?: (index: number) => void;
 };
 
 export const SegmentedNavControl: FC<Props> = ({
-  defaultItemIndex = 0,
+  activeIndex,
   items,
-  pathname = '/',
+  onClick,
 }) => {
-  const [activeIndex, setActiveIndex] = useState(
-    items.map((item) => item.href).indexOf(pathname) || defaultItemIndex
-  );
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef(new Map());
 
@@ -36,12 +35,12 @@ export const SegmentedNavControl: FC<Props> = ({
   }, [activeIndex, containerRef, items]);
 
   const handleClick = (index: number) => {
-    setActiveIndex(index);
+    onClick?.(index);
   };
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <ul className={styles.controls}>
+      <ul className={cn(styles.controls, 'dark:bg-zinc-800')}>
         {items.map((item, index) => {
           return (
             <li
@@ -55,7 +54,11 @@ export const SegmentedNavControl: FC<Props> = ({
               }}
             >
               <Link
-                className='relative z-10 inline-block rounded-full px-3 py-1 text-sm'
+                className={cn(styles.link, {
+                  [styles.activeLink]: activeIndex === index,
+                  'hover:text-neutral-600 dark:hover:text-neutral-300':
+                    activeIndex !== index,
+                })}
                 href={item.href}
                 onClick={() => handleClick(index)}
               >

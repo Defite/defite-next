@@ -4,7 +4,7 @@
 
   display: flex;
   justify-content: center;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 .controls {
@@ -22,10 +22,8 @@
 }
 
 .controls::before {
-  @apply bg-white;
-  @apply border;
-  @apply border-solid;
-  @apply border-gray-200;
+  background-color: var(--control-active-bg);
+  border: var(--control-active-border);
   @apply inline-block;
   @apply rounded-full;
 
@@ -41,4 +39,19 @@
   transition:
     transform 0.3s ease,
     width 0.3s ease;
+}
+
+.link {
+  @apply relative;
+  @apply z-10;
+  @apply inline-block;
+  @apply rounded-full;
+  @apply px-3;
+  @apply py-1;
+  @apply text-sm;
+  @apply text-neutral-500;
+}
+
+.activeLink {
+  color: var(--control-active-color)
 }
