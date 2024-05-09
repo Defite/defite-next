@@ -5,7 +5,8 @@
 @layer base {
   :root {
     --background: theme(colors.neutral.200);
-    --foreground: theme(colors.neutral.900);
+    --foreground: theme(colors.neutral.600);
+    --color-primary: theme(colors.neutral.900);
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -41,7 +42,8 @@
 
   .dark {
     --background: theme(colors.neutral.900);
-    --foreground: theme(colors.neutral.300);
+    --foreground: theme(colors.neutral.400);
+    --color-primary: theme(colors.neutral.100);
 
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -80,9 +82,14 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply font-medium;
   }
 }
 
 .wrapper {
   max-width: 768px;
+}
+
+.color-primary {
+  color: var(--color-primary)
 }

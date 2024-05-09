@@ -56,7 +56,7 @@ export const SegmentedNavControl: FC<Props> = ({
               <Link
                 className={cn(styles.link, {
                   [styles.activeLink]: activeIndex === index,
-                  'hover:text-neutral-600 dark:hover:text-neutral-300':
+                  'hover:text-neutral-900 dark:hover:text-neutral-100':
                     activeIndex !== index,
                 })}
                 href={item.href}
