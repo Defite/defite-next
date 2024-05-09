@@ -10,7 +10,7 @@ export const Logo = ({ onClick }: Props) => {
   return (
     <>
       <Link href='/' onClick={onClick}>
-        <LogoSvg className='text-neutral-800 dark:text-white' />
+        <LogoSvg className='text-neutral-700 dark:text-neutral-300' />
       </Link>
     </>
   );
