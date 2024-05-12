@@ -40,7 +40,7 @@ export const SegmentedNavControl: FC<Props> = ({
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <ul className={cn(styles.controls, 'dark:bg-zinc-800')}>
+      <ul className={styles.controls}>
         {items.map((item, index) => {
           return (
             <li

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: theme(colors.neutral.200);
+    --background: theme(colors.neutral.50);
     --foreground: theme(colors.neutral.600);
     --color-primary: theme(colors.neutral.900);
 
@@ -35,6 +35,7 @@
 
     --radius: 0.5rem;
 
+    --controls-bg: theme(colors.zinc.100);
     --control-active-bg: theme(colors.white);
     --control-active-color: theme(colors.neutral.900);
     --control-active-border: 1px solid theme(colors.gray.200);
@@ -70,6 +71,7 @@
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
 
+    --controls-bg: theme(colors.zinc.800);
     --control-active-bg: theme(colors.orange.600);
     --control-active-color: theme(colors.neutral.300);
     --control-active-border: 0 none;
@@ -91,5 +93,5 @@
 }
 
 .color-primary {
-  color: var(--color-primary)
+  color: var(--color-primary);
 }

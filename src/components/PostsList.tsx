@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FC } from 'react';
+import styles from './styles.module.css';
 
 const postsMock = [
   {
@@ -26,10 +27,13 @@ export const PostsList: FC = () => {
 
       <ul>
         {postsMock.map((post, index) => (
-          <li className='flex gap-9 py-2' key={index}>
-            <span>{post.date}</span>
-            <Link href={post.href} className='color-primary'>
-              {post.title}
+          <li key={index}>
+            <Link
+              href={post.href}
+              className='-mx-3 flex gap-9 rounded-md px-3 py-2 transition-colors duration-200 hover:bg-neutral-100 hover:dark:bg-neutral-800'
+            >
+              <span className='w-28'>{post.date}</span>
+              <span className='color-primary'>{post.title}</span>
             </Link>
           </li>
         ))}
