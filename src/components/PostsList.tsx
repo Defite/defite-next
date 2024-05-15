@@ -20,7 +20,7 @@ const postsMock = [
   },
 ];
 
-export const PostsList: FC = () => {
+export const PostsList: FC = ({ posts }) => {
   return (
     <section className='flex flex-col gap-8'>
       <h2 className='color-primary'>Recent posts</h2>

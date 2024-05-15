@@ -15,8 +15,11 @@ type Props = {
 
 export function useHeaderMenu({ items, defaultItemIndex = 0 }: Props) {
   const pathname = usePathname();
+  const menuIndex = items.findIndex(
+    (item) => item.href !== '/' && pathname.includes(item.href)
+  );
   const [activeIndex, setActiveIndex] = useState(
-    items.map((item) => item.href).indexOf(pathname) || defaultItemIndex
+    menuIndex >= 0 ? menuIndex : defaultItemIndex
   );
 
   const handleGoToHome = () => {

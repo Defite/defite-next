@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+import createMDX from '@next/mdx';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+
 const nextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
@@ -27,6 +31,14 @@ const nextConfig = {
 
     return config;
   },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+  options: {
+    remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+  },
+});
+
+export default withMDX(nextConfig);
