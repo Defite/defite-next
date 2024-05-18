@@ -1,11 +1,16 @@
+import fs from 'fs';
+import path from 'path';
 import { Hero } from '@/components/Hero';
 import { PostsList } from '@/components/PostsList';
+import { getBlogPosts } from '@/utils';
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getBlogPosts();
+
   return (
     <main className='wrapper mx-auto flex flex-col gap-20'>
       <Hero />
-      <PostsList />
+      <PostsList posts={posts} />
     </main>
   );
 }

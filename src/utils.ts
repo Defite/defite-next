@@ -1,14 +1,16 @@
-import fs from 'node:fs/promises';
+import { promises as fs } from 'fs';
 import path from 'path';
-import { compile } from '@mdx-js/mdx';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import { Post } from './types';
 
-type Metadata = {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-};
+export const BLOG_POSTS_PATH = path.join(
+  process.cwd(),
+  'src',
+  'content',
+  'posts'
+);
 
+/** Read BLOG_POSTS_PATH dir and gets only mdx files */
 function getMDXFiles(dir: string) {
   return fs
     .readdir(dir)
@@ -17,73 +19,62 @@ function getMDXFiles(dir: string) {
     );
 }
 
-async function readMDXFile(filePath: string) {
-  const value = await fs.readFile(filePath, 'utf-8');
-
-  return value;
-}
-
-async function getMDXData(dir: string, slug?: string) {
-  // Array of filenames - ['foo-bar.mdx', 'hello-world.mdx']
-  const mdxFiles = await getMDXFiles(dir);
-
-  if (!slug) {
-    const filePromises = mdxFiles.map(
-      async (file) => await readMDXFile(path.join(dir, file))
-    );
-
-    return Promise.all(filePromises);
-  } else {
-    const post = mdxFiles.find((elem) => elem.split('.')[0] === slug);
-    if (post) {
-      return readMDXFile(path.join(dir, post));
-    }
-  }
-}
-
-export async function getBlogPost(slug: string) {
-  return await getMDXData(
-    path.join(process.cwd(), 'src', 'content', 'posts'),
-    slug
-  );
-}
-
+/** Returns array with blog posts info for the post list*/
 export async function getBlogPosts() {
-  return await getMDXData(path.join(process.cwd(), 'src', 'content', 'posts'));
-}
+  const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
 
-export function formatDate(date: string, includeRelative = false) {
-  let currentDate = new Date();
-  if (!date.includes('T')) {
-    date = `${date}T00:00:00`;
-  }
-  let targetDate = new Date(date);
+  const posts = postsPaths.map(async (postPath) => {
+    const source = await fs.readFile(path.join(BLOG_POSTS_PATH, postPath));
+    const { frontmatter } = await compileMDX<Post>({
+      source,
+      options: { parseFrontmatter: true },
+    });
 
-  let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  let monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  let daysAgo = currentDate.getDate() - targetDate.getDate();
+    const { title, date } = frontmatter;
 
-  let formattedDate = '';
-
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
-  } else {
-    formattedDate = 'Today';
-  }
-
-  let fullDate = targetDate.toLocaleString('en-us', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
+    return {
+      slug: '/blog/' + postPath.replace('.mdx', ''),
+      title,
+      date: getDateFormat(date),
+    };
   });
 
-  if (!includeRelative) {
-    return fullDate;
+  return Promise.all(posts);
+}
+
+export async function getSingleBlogPost(slug: string) {
+  const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
+  const postPath = postsPaths.find(
+    (postPath) => postPath.replace('.mdx', '') === slug
+  );
+
+  if (!postPath) {
+    return;
   }
 
-  return `${fullDate} (${formattedDate})`;
+  const source = await fs.readFile(path.join(BLOG_POSTS_PATH, postPath));
+
+  const { content, frontmatter } = await compileMDX<Post>({
+    source,
+    options: { parseFrontmatter: true },
+  });
+
+  const { title, date } = frontmatter;
+
+  return {
+    title,
+    date,
+    content,
+  };
+}
+
+/** Formats date from YYYY-MM-DD to 01 Jan 2024 */
+export function getDateFormat(dateStr: string) {
+  const date = new Date(dateStr);
+  const options = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  } as const;
+  return date.toLocaleDateString('en-GB', options);
 }

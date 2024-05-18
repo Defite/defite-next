@@ -1,13 +1,13 @@
 import { PostsList } from '@/components/PostsList';
 import { getBlogPosts } from '@/utils';
 
-export default function Blog() {
-  const posts = getBlogPosts();
+export default async function Blog() {
+  const posts = await getBlogPosts();
 
   return (
     <main className='wrapper mx-auto'>
       <h1>/blog</h1>
-      <PostsList />
+      <PostsList posts={posts} />
     </main>
   );
 }
