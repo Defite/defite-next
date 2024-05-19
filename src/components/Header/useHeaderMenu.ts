@@ -15,7 +15,6 @@ export const useHeaderMenu = (defaultItemIndex = 0) => {
 
   useEffect(() => {
     menuIndex >= 0 && setActiveIndex(menuIndex);
-    console.log(menuIndex);
   }, [menuIndex]);
 
   return {
