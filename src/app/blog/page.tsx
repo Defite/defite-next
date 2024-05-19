@@ -5,7 +5,7 @@ export default async function Blog() {
   const posts = await getBlogPosts();
 
   return (
-    <main className='wrapper mx-auto'>
+    <main className='wrapper mx-auto pt-16'>
       <PostsList title='/blog' posts={posts} />
     </main>
   );

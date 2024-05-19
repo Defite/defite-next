@@ -10,6 +10,8 @@ export const BLOG_POSTS_PATH = path.join(
   'posts'
 );
 
+export const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
+
 export const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
 
 /** Read BLOG_POSTS_PATH dir and gets only mdx files */
@@ -18,6 +20,14 @@ function getMDXFiles(dir: string) {
     .readdir(dir)
     .then((filenames) =>
       filenames.filter((file) => path.extname(file) === '.mdx')
+    );
+}
+
+function getPostImages(slug: string) {
+  return fs
+    .readdir(path.join(BLOG_POST_IMAGES, slug))
+    .then((filenames) =>
+      filenames.filter((file) => path.extname(file) === '.avif')
     );
 }
 
@@ -46,6 +56,10 @@ export async function getBlogPosts() {
 
 export async function getSingleBlogPost(slug: string) {
   const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
+  const postImages = await getPostImages(slug);
+  let introImage = postImages.find((filename) => filename === 'intro.avif');
+  introImage = introImage ? `/blog/${slug}/${introImage}` : undefined;
+
   const postPath = postsPaths.find(
     (postPath) => postPath.replace('.mdx', '') === slug
   );
@@ -65,8 +79,9 @@ export async function getSingleBlogPost(slug: string) {
 
   return {
     title,
-    date,
+    date: getDateFormat(date),
     content,
+    introImage,
   };
 }
 
