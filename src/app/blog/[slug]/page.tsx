@@ -11,7 +11,6 @@ export default async function Post({ params }: Props) {
   const post = await getSingleBlogPost(params.slug);
 
   if (!post) {
-    // Тут нужно показывать 404 ошибку
     notFound();
   }
 

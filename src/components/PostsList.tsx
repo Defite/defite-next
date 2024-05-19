@@ -3,32 +3,15 @@ import { FC } from 'react';
 import styles from './styles.module.css';
 import { Post } from '@/types';
 
-const postsMock = [
-  {
-    href: '/',
-    title: 'Add https to your localhost',
-    date: 'Sep 1, 2022',
-  },
-  {
-    href: '/',
-    title: 'Upgrading PS5 SSD storage',
-    date: 'Jun 6, 2022',
-  },
-  {
-    href: '/',
-    title: 'Hello world',
-    date: 'Jun 1, 2022',
-  },
-];
-
 type Props = {
+  title: string;
   posts: Post[];
 };
 
-export const PostsList: FC<Props> = ({ posts }) => {
+export const PostsList: FC<Props> = ({ title, posts }) => {
   return (
     <section className='flex flex-col gap-8'>
-      <h2 className='color-primary'>Recent posts</h2>
+      <h2 className='color-primary'>{title}</h2>
 
       <ul>
         {posts.map((post, index) => (

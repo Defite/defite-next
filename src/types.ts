@@ -3,3 +3,9 @@ export type Post = {
   title: string;
   date: string;
 };
+
+export type Page = {
+  slug: string;
+  title: string;
+  description?: string;
+};

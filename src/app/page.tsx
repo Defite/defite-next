@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <main className='wrapper mx-auto flex flex-col gap-20'>
       <Hero />
-      <PostsList posts={posts} />
+      <PostsList title='Recent posts' posts={posts} />
     </main>
   );
 }

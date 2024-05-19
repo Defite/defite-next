@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import { Post } from './types';
+import { Page, Post } from './types';
 
 export const BLOG_POSTS_PATH = path.join(
   process.cwd(),
@@ -9,6 +9,8 @@ export const BLOG_POSTS_PATH = path.join(
   'content',
   'posts'
 );
+
+export const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
 
 /** Read BLOG_POSTS_PATH dir and gets only mdx files */
 function getMDXFiles(dir: string) {
@@ -64,6 +66,32 @@ export async function getSingleBlogPost(slug: string) {
   return {
     title,
     date,
+    content,
+  };
+}
+
+export async function getPage(slug: string) {
+  const pagesPaths = await getMDXFiles(PAGES_PATH);
+  const pagePath = pagesPaths.find(
+    (pagePath) => pagePath.replace('.mdx', '') === slug
+  );
+
+  if (!pagePath) {
+    return;
+  }
+
+  const source = await fs.readFile(path.join(PAGES_PATH, pagePath));
+
+  const { content, frontmatter } = await compileMDX<Page>({
+    source,
+    options: { parseFrontmatter: true },
+  });
+
+  const { title, description } = frontmatter;
+
+  return {
+    title,
+    description,
     content,
   };
 }

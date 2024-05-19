@@ -6,8 +6,7 @@ export default async function Blog() {
 
   return (
     <main className='wrapper mx-auto'>
-      <h1>/blog</h1>
-      <PostsList posts={posts} />
+      <PostsList title='/blog' posts={posts} />
     </main>
   );
 }
