@@ -19,7 +19,7 @@ export default async function Post({ params }: Props) {
 
   return (
     <main className='wrapper mx-auto py-16'>
-      <article className='text-neutral-300'>
+      <article className='text-neutral-700 dark:text-neutral-300'>
         {introImage && (
           <Image
             src={introImage}
@@ -36,7 +36,7 @@ export default async function Post({ params }: Props) {
           <h1 className='text-2xl font-semibold'>{title}</h1>
           <p className='font-normal text-foreground'>{date}</p>
         </div>
-        <div className='prose prose-base dark:prose-dark prose-h2:text-lg prose-h2:mb-2 prose-h2:font-semibold'>
+        <div className='prose prose-base dark:prose-dark prose-h2:text-lg prose-h2:mb-2 prose-h2:font-semibold prose-p:font-normal'>
           {content}
         </div>
       </article>

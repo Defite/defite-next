@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { PluginUtils } from 'tailwindcss/types/config';
 
 const config = {
   darkMode: ['class'],
@@ -53,7 +54,7 @@ const config = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
-      typography: ({ theme }) => ({
+      typography: ({ theme }: PluginUtils) => ({
         base: {
           css: {
             '--tw-prose-body': theme('colors.neutral[900]'),
