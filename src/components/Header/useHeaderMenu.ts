@@ -1,34 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { routes } from '@/routes';
 
-type Item = {
-  text: string;
-  href: string;
-};
-
-type Props = {
-  items: Item[];
-  defaultItemIndex?: number;
-};
-
-export function useHeaderMenu({ items, defaultItemIndex = 0 }: Props) {
+export const useHeaderMenu = (defaultItemIndex = 0) => {
   const pathname = usePathname();
-  const menuIndex = items.findIndex(
-    (item) => item.href !== '/' && pathname.includes(item.href)
+  const menuIndex = routes.findIndex((route) =>
+    route.href !== '/' ? pathname.includes(route.href) : route.href === pathname
   );
   const [activeIndex, setActiveIndex] = useState(
     menuIndex >= 0 ? menuIndex : defaultItemIndex
   );
 
-  const handleGoToHome = () => {
-    setActiveIndex(0);
-  };
+  useEffect(() => {
+    menuIndex >= 0 && setActiveIndex(menuIndex);
+    console.log(menuIndex);
+  }, [menuIndex]);
 
   return {
     activeIndex,
     setActiveIndex,
-    handleGoToHome,
   };
-}
+};

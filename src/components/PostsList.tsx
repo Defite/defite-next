@@ -1,6 +1,7 @@
+'use client';
+
 import Link from 'next/link';
 import { FC } from 'react';
-import styles from './styles.module.css';
 import { Post } from '@/types';
 
 type Props = {

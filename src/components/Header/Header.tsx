@@ -5,33 +5,17 @@ import { Logo } from '../Logo';
 import { SegmentedNavControl } from '@/components/SegmentedNavControl';
 import { useHeaderMenu } from './useHeaderMenu';
 import { ThemeToggle } from '../ThemeToggle';
-
-const items = [
-  {
-    text: 'Home',
-    href: '/',
-  },
-  {
-    text: 'Blog',
-    href: '/blog',
-  },
-  {
-    text: 'About',
-    href: '/about',
-  },
-];
+import { routes } from '@/routes';
 
 export const Header = () => {
-  const { activeIndex, handleGoToHome, setActiveIndex } = useHeaderMenu({
-    items,
-  });
+  const { activeIndex, setActiveIndex } = useHeaderMenu();
 
   return (
     <header className='wrapper mx-auto'>
       <div className='flex items-center justify-between py-5'>
-        <Logo onClick={handleGoToHome} />
+        <Logo />
         <SegmentedNavControl
-          items={items}
+          items={routes}
           activeIndex={activeIndex}
           onClick={setActiveIndex}
         />
