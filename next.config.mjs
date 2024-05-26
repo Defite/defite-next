@@ -2,6 +2,8 @@
 import createMDX from '@next/mdx';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+// @ts-check
+import withPlaiceholder from '@plaiceholder/next';
 
 const nextConfig = {
   webpack(config) {
@@ -41,4 +43,4 @@ const withMDX = createMDX({
   },
 });
 
-export default withMDX(nextConfig);
+export default withPlaiceholder(withMDX(nextConfig));

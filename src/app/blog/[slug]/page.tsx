@@ -1,4 +1,4 @@
-import { getSingleBlogPost } from '@/utils';
+import { getSingleBlogPost, getBlurredImage } from '@/utils';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
@@ -16,6 +16,7 @@ export default async function Post({ params }: Props) {
   }
 
   const { title, date, content, introImage } = post;
+  const introImageBlur = await getBlurredImage(introImage);
 
   return (
     <main className='wrapper mx-auto py-16'>
@@ -30,13 +31,15 @@ export default async function Post({ params }: Props) {
             style={{
               height: '350px',
             }}
+            placeholder='blur'
+            blurDataURL={introImageBlur}
           />
         )}
         <div className='mb-8 flex flex-col gap-3'>
           <h1 className='text-2xl font-semibold'>{title}</h1>
           <p className='font-normal text-foreground'>{date}</p>
         </div>
-        <div className='prose prose-base dark:prose-dark prose-h2:text-lg prose-h2:mb-2 prose-h2:font-semibold prose-p:font-normal'>
+        <div className='prose prose-base dark:prose-dark prose-h2:mb-2 prose-h2:text-lg prose-h2:font-semibold prose-p:font-normal'>
           {content}
         </div>
       </article>

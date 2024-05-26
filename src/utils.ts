@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { Page, Post } from './types';
+import { getPlaiceholder } from 'plaiceholder';
 
 export const BLOG_POSTS_PATH = path.join(
   process.cwd(),
@@ -11,6 +12,7 @@ export const BLOG_POSTS_PATH = path.join(
 );
 
 export const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
+export const BLOG_POST_IMAGE_PATH = path.join(process.cwd(), 'public');
 
 export const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
 
@@ -120,4 +122,16 @@ export function getDateFormat(dateStr: string) {
     year: 'numeric',
   } as const;
   return date.toLocaleDateString('en-GB', options);
+}
+
+/** Creates base64 blurred image from source */
+export async function getBlurredImage(src?: string) {
+  if (!src) {
+    return;
+  }
+
+  const buffer = await fs.readFile(path.join(BLOG_POST_IMAGE_PATH, src));
+  const { base64 } = await getPlaiceholder(buffer);
+
+  return base64;
 }
