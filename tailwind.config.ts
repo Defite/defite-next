@@ -127,6 +127,11 @@ const config = {
             '--tw-prose-invert-td-borders': theme('colors.pink[700]'),
           },
         },
+        DEFAULT: {
+          css: {
+            maxWidth: '100% ',
+          },
+        },
       }),
       borderRadius: {
         lg: 'var(--radius)',

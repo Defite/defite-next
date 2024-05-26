@@ -19,7 +19,7 @@ export default async function Post({ params }: Props) {
   const introImageBlur = await getBlurredImage(introImage);
 
   return (
-    <main className='wrapper mx-auto py-16'>
+    <main className='wrapper mx-auto px-2 py-16 lg:px-0'>
       <article className='text-neutral-700 dark:text-neutral-300'>
         {introImage && (
           <Image
@@ -27,10 +27,7 @@ export default async function Post({ params }: Props) {
             width={768}
             height={384}
             alt={title}
-            className='-ml-4 mb-8 w-[calc(100%+32px)] max-w-none rounded-xl object-cover'
-            style={{
-              height: '350px',
-            }}
+            className='mx-auto mb-8 h-full max-w-full rounded-xl object-cover lg:-ml-4 lg:h-[350px] lg:w-[calc(100%+32px)] lg:max-w-none'
             placeholder='blur'
             blurDataURL={introImageBlur}
           />
