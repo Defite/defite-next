@@ -48,7 +48,7 @@ export async function getBlogPosts() {
     const formattedDate = await getDateFormat(date);
 
     return {
-      slug: '/blog/' + postPath.replace('.mdx', ''),
+      slug: postPath.replace('.mdx', ''),
       title,
       date: formattedDate,
     };

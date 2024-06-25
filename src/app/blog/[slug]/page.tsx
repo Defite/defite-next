@@ -1,4 +1,4 @@
-import { getSingleBlogPost } from '@/utils';
+import { getBlogPosts, getSingleBlogPost } from '@/utils';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getPlaceholderImage } from '@/image';
@@ -43,4 +43,12 @@ export default async function Post({ params }: Props) {
       </article>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
