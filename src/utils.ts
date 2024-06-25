@@ -1,20 +1,20 @@
+'use server';
+
 import { promises as fs } from 'fs';
 import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { Page, Post } from './types';
-import { getPlaiceholder } from 'plaiceholder';
 
-export const BLOG_POSTS_PATH = path.join(
+const BLOG_POSTS_PATH = path.join(
   process.cwd(),
   'src',
   'content',
   'posts'
 );
 
-export const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
-export const BLOG_POST_IMAGE_PATH = path.join(process.cwd(), 'public');
-
-export const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
+const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
+const BLOG_POST_IMAGE_PATH = path.join(process.cwd(), 'public');
+const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
 
 /** Read BLOG_POSTS_PATH dir and gets only mdx files */
 function getMDXFiles(dir: string) {
@@ -45,11 +45,12 @@ export async function getBlogPosts() {
     });
 
     const { title, date } = frontmatter;
+    const formattedDate = await getDateFormat(date);
 
     return {
       slug: '/blog/' + postPath.replace('.mdx', ''),
       title,
-      date: getDateFormat(date),
+      date: formattedDate,
     };
   });
 
@@ -78,10 +79,11 @@ export async function getSingleBlogPost(slug: string) {
   });
 
   const { title, date } = frontmatter;
+  const formattedDate = await getDateFormat(date);
 
   return {
     title,
-    date: getDateFormat(date),
+    date: formattedDate,
     content,
     introImage: introImagePath,
   };
@@ -114,7 +116,7 @@ export async function getPage(slug: string) {
 }
 
 /** Formats date from YYYY-MM-DD to 01 Jan 2024 */
-export function getDateFormat(dateStr: string) {
+export async function getDateFormat(dateStr: string) {
   const date = new Date(dateStr);
   const options = {
     day: 'numeric',
@@ -131,7 +133,4 @@ export async function getBlurredImage(src?: string) {
   }
 
   const buffer = await fs.readFile(path.join(BLOG_POST_IMAGE_PATH, src));
-  const { base64 } = await getPlaiceholder(buffer);
-
-  return base64;
 }

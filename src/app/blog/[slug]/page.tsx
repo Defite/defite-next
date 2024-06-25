@@ -1,6 +1,7 @@
 import { getSingleBlogPost } from '@/utils';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { getPlaceholderImage } from '@/image';
 
 type Props = {
   params: {
@@ -15,21 +16,21 @@ export default async function Post({ params }: Props) {
     notFound();
   }
 
-  const { title, date, content, introImage } = post;
-  // const introImageBlur = await getBlurredImage(introImage);
+  const { title, date, content, introImage = '' } = post;
+  const imageWithPlaceholder = await getPlaceholderImage(introImage);
 
   return (
     <main className='wrapper mx-auto px-2 py-16 lg:px-0'>
       <article className='text-neutral-700 dark:text-neutral-300'>
         {introImage && (
           <Image
-            src={introImage}
+            src={imageWithPlaceholder.src}
             width={768}
             height={384}
             alt={title}
             className='mx-auto mb-8 h-full max-w-full rounded-xl object-cover lg:-ml-4 lg:h-[350px] lg:w-[calc(100%+32px)] lg:max-w-none'
-            // placeholder='blur'
-            // blurDataURL={introImageBlur}
+            placeholder='blur'
+            blurDataURL={imageWithPlaceholder.placeholder}
           />
         )}
         <div className='mb-8 flex flex-col gap-3'>
