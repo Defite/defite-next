@@ -60,7 +60,7 @@ export async function getSingleBlogPost(slug: string) {
   const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
   const postImages = await getPostImages(slug);
   let introImage = postImages.find((filename) => filename === 'intro.avif');
-  introImage = introImage ? `/blog/${slug}/${introImage}` : undefined;
+  let introImagePath = introImage ? `/blog/${slug}/${introImage}` : undefined;
 
   const postPath = postsPaths.find(
     (postPath) => postPath.replace('.mdx', '') === slug
@@ -83,7 +83,7 @@ export async function getSingleBlogPost(slug: string) {
     title,
     date: getDateFormat(date),
     content,
-    introImage,
+    introImage: introImagePath,
   };
 }
 
