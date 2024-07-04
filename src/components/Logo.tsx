@@ -9,7 +9,7 @@ type Props = {
 export const Logo = ({ onClick }: Props) => {
   return (
     <>
-      <Link href='/' onClick={onClick}>
+      <Link href='/' aria-label='D.' onClick={onClick}>
         <LogoSvg className='text-neutral-700 dark:text-neutral-300' />
       </Link>
     </>
