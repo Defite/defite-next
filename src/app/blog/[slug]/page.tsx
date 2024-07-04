@@ -29,6 +29,7 @@ export default async function Post({ params }: Props) {
             height={384}
             alt={title}
             className='mx-auto mb-8 h-full max-w-full rounded-xl object-cover lg:-ml-4 lg:h-[350px] lg:w-[calc(100%+32px)] lg:max-w-none'
+            sizes='(max-width: 768px) 70vw, 50vw'
             placeholder='blur'
             blurDataURL={imageWithPlaceholder.placeholder}
             priority
