@@ -31,6 +31,7 @@ export default async function Post({ params }: Props) {
             className='mx-auto mb-8 h-full max-w-full rounded-xl object-cover lg:-ml-4 lg:h-[350px] lg:w-[calc(100%+32px)] lg:max-w-none'
             placeholder='blur'
             blurDataURL={imageWithPlaceholder.placeholder}
+            priority
           />
         )}
         <div className='mb-8 flex flex-col gap-3'>
