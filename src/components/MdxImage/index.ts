@@ -1,0 +1,1 @@
+export { MdxImage } from './MdxImage';

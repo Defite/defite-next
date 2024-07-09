@@ -22,7 +22,15 @@ export const PostsList: FC<Props> = ({ title, posts }) => {
               className='-mx-3 flex gap-9 rounded-md px-3 py-2 transition-colors duration-200 hover:bg-neutral-100 hover:dark:bg-neutral-800'
             >
               <span className='w-28'>{post.date}</span>
-              <span className='color-primary'>{post.title}</span>
+              <span>
+                <span className='color-primary'>{post.title}</span>
+                {post.description ? (
+                  <>
+                    <span className='mx-2'>&#8212;</span>
+                    <span className='text-sm'>{post.description}</span>
+                  </>
+                ) : null}
+              </span>
             </Link>
           </li>
         ))}

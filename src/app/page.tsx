@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { Hero } from '@/components/Hero';
 import { PostsList } from '@/components/PostsList';
 import { getBlogPosts } from '@/utils';

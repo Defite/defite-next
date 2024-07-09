@@ -2,7 +2,7 @@
 
 import cn from 'classnames';
 import Link from 'next/link';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import styles from './styles.module.css';
 
 type Item = {

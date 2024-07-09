@@ -1,5 +1,5 @@
 import { Page } from '@/types';
-import { getPage, getSingleBlogPost } from '@/utils';
+import { getPage } from '@/utils';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -13,7 +13,7 @@ export default async function GenericPage({ params }: Props) {
     notFound();
   }
 
-  const { title, content, description } = page;
+  const { title, content } = page;
 
   return (
     <main className='wrapper mx-auto px-2 pt-16 lg:px-0'>

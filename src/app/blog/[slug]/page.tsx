@@ -16,7 +16,7 @@ export default async function Post({ params }: Props) {
     notFound();
   }
 
-  const { title, date, content, introImage = '' } = post;
+  const { title, description, date, content, introImage = '' } = post;
   const imageWithPlaceholder = await getPlaceholderImage(introImage);
 
   return (
@@ -28,7 +28,7 @@ export default async function Post({ params }: Props) {
             width={768}
             height={384}
             alt={title}
-            className='mx-auto mb-8 h-full max-w-full rounded-xl object-cover lg:-ml-4 lg:h-[350px] lg:w-[calc(100%+32px)] lg:max-w-none'
+            className='mx-auto mb-8 h-full max-w-full rounded-xl object-cover lg:-ml-4 lg:w-[calc(100%+32px)] lg:max-w-none'
             sizes='(max-width: 768px) 70vw, 50vw'
             placeholder='blur'
             blurDataURL={imageWithPlaceholder.placeholder}
@@ -36,7 +36,12 @@ export default async function Post({ params }: Props) {
           />
         )}
         <div className='mb-8 flex flex-col gap-3'>
-          <h1 className='text-2xl font-semibold'>{title}</h1>
+          <div>
+            <h1 className='text-2xl font-semibold'>{title}</h1>
+            {description ? (
+              <p className='text-lg text-foreground'>{description}</p>
+            ) : null}
+          </div>
           <p className='font-normal text-foreground'>{date}</p>
         </div>
         <div className='prose prose-base dark:prose-dark prose-h2:mb-2 prose-h2:text-lg prose-h2:font-semibold prose-p:font-normal'>

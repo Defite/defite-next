@@ -4,16 +4,11 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { Page, Post } from './types';
+import { MdxImage } from './components/MdxImage';
 
-const BLOG_POSTS_PATH = path.join(
-  process.cwd(),
-  'src',
-  'content',
-  'posts'
-);
+const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
 
 const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
-const BLOG_POST_IMAGE_PATH = path.join(process.cwd(), 'public');
 const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
 
 /** Read BLOG_POSTS_PATH dir and gets only mdx files */
@@ -25,12 +20,28 @@ function getMDXFiles(dir: string) {
     );
 }
 
-function getPostImages(slug: string) {
-  return fs
-    .readdir(path.join(BLOG_POST_IMAGES, slug))
-    .then((filenames) =>
-      filenames.filter((file) => path.extname(file) === '.avif')
-    );
+async function getPostImages(slug: string, skipWarning?: boolean) {
+  const dir = path.join(BLOG_POST_IMAGES, slug);
+
+  try {
+    await fs.stat(dir);
+
+    return fs
+      .readdir(dir)
+      .then((filenames) =>
+        filenames.filter((file) => path.extname(file) === '.avif')
+      );
+  } catch (error) {
+    // There's no intro image, is it supposed to be so?
+    if (!skipWarning) {
+      /* eslint-disable-next-line no-console */
+      console.warn(
+        `Can\'t find intro image in ${dir}. JFYI, nothing to worry about.`
+      );
+    }
+
+    return [];
+  }
 }
 
 /** Returns array with blog posts info for the post list*/
@@ -44,22 +55,26 @@ export async function getBlogPosts() {
       options: { parseFrontmatter: true },
     });
 
-    const { title, date } = frontmatter;
+    const { title, date, description } = frontmatter;
     const formattedDate = await getDateFormat(date);
 
     return {
       slug: postPath.replace('.mdx', ''),
       title,
+      description,
       date: formattedDate,
+      createdDate: +new Date(date),
     };
   });
 
-  return Promise.all(posts);
+  const data = await Promise.all(posts);
+
+  return data.sort((a, b) => b.createdDate - a.createdDate);
 }
 
 export async function getSingleBlogPost(slug: string) {
   const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
-  const postImages = await getPostImages(slug);
+  const postImages = await getPostImages(slug, true);
   let introImage = postImages.find((filename) => filename === 'intro.avif');
   let introImagePath = introImage ? `/blog/${slug}/${introImage}` : undefined;
 
@@ -76,13 +91,15 @@ export async function getSingleBlogPost(slug: string) {
   const { content, frontmatter } = await compileMDX<Post>({
     source,
     options: { parseFrontmatter: true },
+    components: { MdxImage },
   });
 
-  const { title, date } = frontmatter;
+  const { title, date, description } = frontmatter;
   const formattedDate = await getDateFormat(date);
 
   return {
     title,
+    description,
     date: formattedDate,
     content,
     introImage: introImagePath,
@@ -124,13 +141,4 @@ export async function getDateFormat(dateStr: string) {
     year: 'numeric',
   } as const;
   return date.toLocaleDateString('en-GB', options);
-}
-
-/** Creates base64 blurred image from source */
-export async function getBlurredImage(src?: string) {
-  if (!src) {
-    return;
-  }
-
-  const buffer = await fs.readFile(path.join(BLOG_POST_IMAGE_PATH, src));
 }
