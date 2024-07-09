@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Logo } from '../Logo';
+import { Logo } from './Logo';
 import { SegmentedNavControl } from '@/components/SegmentedNavControl';
-import { useHeaderMenu } from './useHeaderMenu';
-import { ThemeToggle } from '../ThemeToggle';
+import { useHeaderMenu } from '../hooks/use-header-menu';
+import { ThemeToggle } from './ThemeToggle';
 import { routes } from '@/routes';
 
 export const Header = () => {
