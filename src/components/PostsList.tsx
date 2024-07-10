@@ -21,7 +21,7 @@ export const PostsList: FC<Props> = ({ title, posts }) => {
               href={`/blog/${post.slug}`}
               className='-mx-3 flex gap-9 rounded-md px-3 py-2 transition-colors duration-200 hover:bg-neutral-100 hover:dark:bg-neutral-800'
             >
-              <span className='w-28'>{post.date}</span>
+              <span className='shrink-0 grow-0 basis-28'>{post.date}</span>
               <span>
                 <span className='color-primary'>{post.title}</span>
                 {post.description ? (
