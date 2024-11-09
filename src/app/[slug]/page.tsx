@@ -3,7 +3,7 @@ import { getPage } from '@/utils';
 import { notFound } from 'next/navigation';
 
 type Props = {
-  params: Page;
+  params: Promise<Page>;
 };
 
 export default async function GenericPage(props: Props) {
