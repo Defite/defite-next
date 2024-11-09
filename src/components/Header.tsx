@@ -12,7 +12,7 @@ export const Header = () => {
 
   return (
     <header className='wrapper mx-auto'>
-      <div className='flex items-center justify-between px-2 py-5 lg:px-0'>
+      <div className='flex items-center justify-between px-3 py-5 lg:px-0'>
         <Logo />
         <SegmentedNavControl
           items={routes}

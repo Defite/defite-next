@@ -21,7 +21,7 @@ export default async function Post(props: Props) {
   const imageWithPlaceholder = await getPlaceholderImage(introImage);
 
   return (
-    <main className='wrapper mx-auto px-2 py-16 lg:px-0'>
+    <main className='wrapper mx-auto px-3 py-16 lg:px-0'>
       <article className='text-neutral-700 dark:text-neutral-300'>
         {introImage && (
           <Image

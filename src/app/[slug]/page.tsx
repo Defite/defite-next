@@ -17,7 +17,7 @@ export default async function GenericPage(props: Props) {
   const { title, content } = page;
 
   return (
-    <main className='wrapper mx-auto px-2 pt-16 lg:px-0'>
+    <main className='wrapper mx-auto px-3 pt-16 lg:px-0'>
       <h1 className='color-primary'>{title}</h1>
       {content}
     </main>
