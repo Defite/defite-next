@@ -106,6 +106,16 @@ export async function getSingleBlogPost(slug: string) {
   };
 }
 
+export async function getPagesSlugs() {
+  const pagesPaths = await getMDXFiles(PAGES_PATH);
+
+  return pagesPaths.map((pagePath) => {
+    return {
+      slug: pagePath.replace('.mdx', '')
+    }
+  })
+ }
+
 export async function getPage(slug: string) {
   const pagesPaths = await getMDXFiles(PAGES_PATH);
   const pagePath = pagesPaths.find(

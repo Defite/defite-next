@@ -1,5 +1,5 @@
 import { Page } from '@/types';
-import { getPage } from '@/utils';
+import { getPage, getPagesSlugs } from '@/utils';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -23,3 +23,12 @@ export default async function GenericPage(props: Props) {
     </main>
   );
 }
+
+export async function generateStaticParams() {
+  const pages = await getPagesSlugs();
+
+  return pages.map((page) => ({
+    slug: page.slug,
+  }));
+}
+
