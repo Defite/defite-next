@@ -10,7 +10,7 @@ export function MdxImage(props: Props) {
   const { caption, alt } = props;
   return (
     <figure className={style.figure}>
-      <Image {...props} alt={alt} />
+      <Image {...props} alt={alt || caption || 'There was an image here'} />
       {caption ? (
         <figcaption className={style.figcaption}>{caption}</figcaption>
       ) : null}

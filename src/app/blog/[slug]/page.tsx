@@ -4,12 +4,13 @@ import Image from 'next/image';
 import { getPlaceholderImage } from '@/image';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function Post({ params }: Props) {
+export default async function Post(props: Props) {
+  const params = await props.params;
   const post = await getSingleBlogPost(params.slug);
 
   if (!post) {

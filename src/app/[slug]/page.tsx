@@ -6,7 +6,8 @@ type Props = {
   params: Page;
 };
 
-export default async function GenericPage({ params }: Props) {
+export default async function GenericPage(props: Props) {
+  const params = await props.params;
   const page = await getPage(params.slug);
 
   if (!page) {
