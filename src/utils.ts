@@ -6,8 +6,14 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import { Page, Post } from './types';
 import { MdxImage } from './components/MdxImage';
 import { MdxYoutube } from './components/MdxYoutube';
+import rehypeExpressiveCode from 'rehype-expressive-code';
 
 const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
+
+/** @type {import('rehype-expressive-code').RehypeExpressiveCodeOptions} */
+const rehypeExpressiveCodeOptions = {
+  themes: ['nord'],
+};
 
 const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
 const PAGES_PATH = path.join(process.cwd(), 'src', 'content', 'pages');
@@ -53,7 +59,9 @@ export async function getBlogPosts() {
     const source = await fs.readFile(path.join(BLOG_POSTS_PATH, postPath));
     const { frontmatter } = await compileMDX<Post>({
       source,
-      options: { parseFrontmatter: true },
+      options: {
+        parseFrontmatter: true,
+      },
     });
 
     const { title, date, description } = frontmatter;
@@ -91,7 +99,13 @@ export async function getSingleBlogPost(slug: string) {
 
   const { content, frontmatter } = await compileMDX<Post>({
     source,
-    options: { parseFrontmatter: true },
+    options: {
+      parseFrontmatter: true,
+      mdxOptions: {
+        remarkPlugins: [],
+        rehypePlugins: [[rehypeExpressiveCode, rehypeExpressiveCodeOptions]],
+      },
+    },
     components: { MdxImage, MdxYoutube },
   });
 
@@ -112,10 +126,10 @@ export async function getPagesSlugs() {
 
   return pagesPaths.map((pagePath) => {
     return {
-      slug: pagePath.replace('.mdx', '')
-    }
-  })
- }
+      slug: pagePath.replace('.mdx', ''),
+    };
+  });
+}
 
 export async function getPage(slug: string) {
   const pagesPaths = await getMDXFiles(PAGES_PATH);
