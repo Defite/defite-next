@@ -5,6 +5,7 @@ import path from 'path';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { Page, Post } from './types';
 import { MdxImage } from './components/MdxImage';
+import { MdxYoutube } from './components/MdxYoutube';
 
 const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
 
@@ -91,7 +92,7 @@ export async function getSingleBlogPost(slug: string) {
   const { content, frontmatter } = await compileMDX<Post>({
     source,
     options: { parseFrontmatter: true },
-    components: { MdxImage },
+    components: { MdxImage, MdxYoutube },
   });
 
   const { title, date, description } = frontmatter;
