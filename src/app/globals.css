@@ -88,6 +88,10 @@
   }
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 .wrapper {
   max-width: 768px;
 }
