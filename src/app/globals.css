@@ -35,7 +35,7 @@
 
     --radius: 0.5rem;
 
-    --controls-bg: theme(colors.zinc.100);
+    --controls-bg: #f0f0f0;
     --control-active-bg: theme(colors.white);
     --control-active-color: theme(colors.neutral.900);
     --control-active-border: 1px solid theme(colors.gray.200);
@@ -88,6 +88,16 @@
   }
 }
 
+@layer utilities {
+  .bg-control {
+    background-color: var(--controls-bg);
+  }
+
+  .bg-control-active {
+    background-color: var(--control-active-bg);
+  }
+}
+
 html {
   scrollbar-gutter: stable;
 }
@@ -99,3 +109,5 @@ html {
 .color-primary {
   color: var(--color-primary);
 }
+
+
