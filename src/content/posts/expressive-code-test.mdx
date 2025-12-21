@@ -1,0 +1,27 @@
+---
+title: Expressive code testing
+description: How to cook code highlighting
+date: '2025-01-01'
+---
+
+Sometimes I need to paste some code snippets in blog posts and thank God I've found [Expressive Code](https://expressive-code.com/) for that task.
+
+```tsx title="example.tsx"
+import { FC, ReactNode } from 'react';
+
+interface Props {
+  title: string;
+  children?: ReactNode;
+}
+
+const Example: FC<Props> = ({ title, children }) => {
+  return (
+    <div>
+      <h1>{title}</h1>
+      <div>{children}</div>
+    </div>
+  )
+}
+
+export { Example };
+```

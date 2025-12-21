@@ -4,12 +4,10 @@
 
 @layer base {
   :root {
+    --accent-color: theme(colors.orange.600);
     --background: theme(colors.neutral.50);
     --foreground: theme(colors.neutral.600);
     --color-primary: theme(colors.neutral.900);
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
 
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
@@ -42,9 +40,6 @@
     --background: theme(colors.neutral.900);
     --foreground: theme(colors.neutral.400);
     --color-primary: theme(colors.neutral.100);
-
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
 
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
@@ -113,4 +108,16 @@ html {
 
 .color-primary {
   color: var(--color-primary);
+}
+
+.prose a {
+  color: var(--tw-prose-body);
+  text-decoration: none;
+  font-weight: normal;
+  border-bottom: 3px solid var(--accent-color);
+}
+
+.prose a:hover {
+  text-decoration: none;
+  border-bottom: none;
 }

@@ -52,7 +52,7 @@ const config = {
             '--tw-prose-body': theme('colors.neutral[900]'),
             '--tw-prose-headings': theme('colors.neutral[900]'),
             '--tw-prose-lead': theme('colors.pink[700]'),
-            '--tw-prose-links': theme('colors.pink[900]'),
+            '--tw-prose-links': theme('colors.orange[600]'),
             '--tw-prose-bold': theme('colors.pink[900]'),
             '--tw-prose-counters': theme('colors.pink[600]'),
             '--tw-prose-bullets': theme('colors.pink[400]'),
@@ -88,7 +88,7 @@ const config = {
             '--tw-prose-body': theme('colors.neutral[300]'),
             '--tw-prose-headings': theme('colors.neutral[300]'),
             '--tw-prose-lead': theme('colors.pink[700]'),
-            '--tw-prose-links': theme('colors.pink[900]'),
+            '--tw-prose-links': theme('colors.orange[400]'),
             '--tw-prose-bold': theme('colors.pink[900]'),
             '--tw-prose-counters': theme('colors.pink[600]'),
             '--tw-prose-bullets': theme('colors.pink[400]'),
@@ -129,20 +129,6 @@ const config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
-      },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },

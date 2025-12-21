@@ -12,7 +12,12 @@ const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
 
 /** @type {import('rehype-expressive-code').RehypeExpressiveCodeOptions} */
 const rehypeExpressiveCodeOptions = {
-  themes: ['nord'],
+//  themes: ['dracula', 'solarized-light'],
+  themes: ['catppuccin-latte', 'houston'],
+  useDarkModeMediaQuery: false,
+  themeCssSelector: (theme: { name: string; }) => {
+    return theme.name === 'houston' ? '.dark' : '.light'
+  }
 };
 
 const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
