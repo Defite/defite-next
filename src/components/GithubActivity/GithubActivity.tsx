@@ -12,6 +12,7 @@ export const GithubActivity = () => {
       <GitHubCalendar
         colorScheme={theme === 'dark' ? 'dark' : 'light'}
         username='Defite'
+        loading={typeof window === 'undefined'}
       />
     </section>
   );
