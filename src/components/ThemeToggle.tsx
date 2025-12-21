@@ -3,7 +3,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes';
 import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
-import classNames from 'classnames';
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();
