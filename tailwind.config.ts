@@ -21,7 +21,7 @@ const config = {
     extend: {
       colors: {
         border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
+        // input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
@@ -44,14 +44,6 @@ const config = {
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
         },
       },
       typography: ({ theme }: PluginUtils) => ({
