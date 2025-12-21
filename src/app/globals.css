@@ -121,3 +121,7 @@ html {
   text-decoration: none;
   border-bottom: none;
 }
+
+dialog [data-rmiz-modal-overlay="visible"] {
+  background-color: var(--background);
+}
