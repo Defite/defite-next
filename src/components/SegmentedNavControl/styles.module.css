@@ -51,7 +51,6 @@
   @apply px-3;
   @apply py-1;
   @apply text-sm;
-  color: var(--foreground);
 }
 
 .activeLink {

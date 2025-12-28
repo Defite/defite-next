@@ -52,7 +52,7 @@ export const SegmentedNavControl = (props: Props) => {
               }}
             >
               <Link
-                className={cn(styles.link, {
+                className={cn(styles.link, 'text-foreground', {
                   [styles.activeLink]: activeIndex === index,
                   'hover:text-neutral-900 dark:hover:text-neutral-100':
                     activeIndex !== index,
