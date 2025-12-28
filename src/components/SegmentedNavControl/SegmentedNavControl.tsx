@@ -2,25 +2,23 @@
 
 import cn from 'classnames';
 import Link from 'next/link';
-import { FC, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './styles.module.css';
 
-type Item = {
+interface Item {
   text: string;
   href: string;
 };
 
-type Props = {
+interface Props {
   activeIndex: number;
   items: Item[];
   onClick?: (index: number) => void;
 };
 
-export const SegmentedNavControl: FC<Props> = ({
-  activeIndex,
-  items,
-  onClick,
-}) => {
+export const SegmentedNavControl = (props: Props) => {
+  const { activeIndex, items, onClick } = props; 
+  
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef(new Map());
 
@@ -35,7 +33,7 @@ export const SegmentedNavControl: FC<Props> = ({
   }, [activeIndex, containerRef, items]);
 
   const handleClick = (index: number) => {
-    onClick?.(index);
+    return () => onClick?.(index);
   };
 
   return (
@@ -60,7 +58,7 @@ export const SegmentedNavControl: FC<Props> = ({
                     activeIndex !== index,
                 })}
                 href={item.href}
-                onClick={() => handleClick(index)}
+                onClick={handleClick(index)}
               >
                 {item.text}
               </Link>
