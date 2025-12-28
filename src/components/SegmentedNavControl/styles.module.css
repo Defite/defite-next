@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .container {
   --highlight-width: auto;
   --highlight-x-pos: 0;

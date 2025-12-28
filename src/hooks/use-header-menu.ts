@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { routes } from '@/routes';
 
@@ -12,10 +12,6 @@ export const useHeaderMenu = (defaultItemIndex = 0) => {
   const [activeIndex, setActiveIndex] = useState(
     menuIndex >= 0 ? menuIndex : defaultItemIndex
   );
-
-  useEffect(() => {
-    menuIndex >= 0 && setActiveIndex(menuIndex);
-  }, [menuIndex]);
 
   return {
     activeIndex,

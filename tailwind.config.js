@@ -1,5 +1,4 @@
-import type { Config } from 'tailwindcss';
-import { PluginUtils } from 'tailwindcss/types/config';
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 const config = {
   darkMode: ['class'],
@@ -46,7 +45,7 @@ const config = {
           foreground: 'hsl(var(--accent-foreground))',
         },
       },
-      typography: ({ theme }: PluginUtils) => ({
+      typography: ({ theme }) => ({
         base: {
           css: {
             '--tw-prose-body': theme('colors.neutral[900]'),
@@ -133,6 +132,6 @@ const config = {
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
-} satisfies Config;
+};
 
 export default config;

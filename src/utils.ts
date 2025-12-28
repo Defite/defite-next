@@ -12,7 +12,6 @@ const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
 
 /** @type {import('rehype-expressive-code').RehypeExpressiveCodeOptions} */
 const rehypeExpressiveCodeOptions = {
-//  themes: ['dracula', 'solarized-light'],
   themes: ['catppuccin-latte', 'houston'],
   useDarkModeMediaQuery: false,
   themeCssSelector: (theme: { name: string; }) => {
@@ -43,12 +42,11 @@ async function getPostImages(slug: string, skipWarning?: boolean) {
       .then((filenames) =>
         filenames.filter((file) => path.extname(file) === '.avif')
       );
-  } catch (error) {
+  } catch {
     // There's no intro image, is it supposed to be so?
     if (!skipWarning) {
-      /* eslint-disable-next-line no-console */
       console.warn(
-        `Can\'t find intro image in ${dir}. JFYI, nothing to worry about.`
+        `Can't find intro image in ${dir}. JFYI, nothing to worry about.`
       );
     }
 
@@ -89,8 +87,8 @@ export async function getBlogPosts() {
 export async function getSingleBlogPost(slug: string) {
   const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
   const postImages = await getPostImages(slug, true);
-  let introImage = postImages.find((filename) => filename === 'intro.avif');
-  let introImagePath = introImage ? `/blog/${slug}/${introImage}` : undefined;
+  const introImage = postImages.find((filename) => filename === 'intro.avif');
+  const introImagePath = introImage ? `/blog/${slug}/${introImage}` : undefined;
 
   const postPath = postsPaths.find(
     (postPath) => postPath.replace('.mdx', '') === slug
