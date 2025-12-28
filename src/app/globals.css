@@ -77,9 +77,6 @@
   }
 }
 
-@layer base {
-}
-
 @layer utilities {
   .text-foreground {
     color: var(--foreground)
