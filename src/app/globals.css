@@ -1,13 +1,47 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-foreground {
+  color: var(--foreground);
+}
+
+@utility bg-foreground {
+  background-color: var(--foreground);
+}
+
+@utility bg-control {
+  background-color: var(--controls-bg);
+}
+
+@utility bg-control-active {
+  background-color: var(--control-active-bg);
+}
 
 @layer base {
   :root {
-    --accent-color: theme(colors.orange.600);
-    --background: theme(colors.neutral.50);
-    --foreground: theme(colors.neutral.600);
-    --color-primary: theme(colors.neutral.900);
+    --accent-color: var(--color-orange-600);
+    --background: var(--color-neutral-50);
+    --foreground: var(--color-neutral-600);
+    --color-primary: var(--color-neutral-900);
 
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
@@ -31,15 +65,15 @@
     --radius: 0.5rem;
 
     --controls-bg: #f0f0f0;
-    --control-active-bg: theme(colors.white);
-    --control-active-color: theme(colors.neutral.900);
-    --control-active-border: 1px solid theme(colors.gray.200);
+    --control-active-bg: var(--color-white);
+    --control-active-color: var(--color-neutral-900);
+    --control-active-border: 1px solid var(--color-gray-200);
   }
 
   .dark {
-    --background: theme(colors.neutral.900);
-    --foreground: theme(colors.neutral.400);
-    --color-primary: theme(colors.neutral.100);
+    --background: var(--color-neutral-900);
+    --foreground: var(--color-neutral-400);
+    --color-primary: var(--color-neutral-100);
 
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
@@ -60,9 +94,9 @@
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
 
-    --controls-bg: theme(colors.zinc.800);
-    --control-active-bg: theme(colors.orange.600);
-    --control-active-color: theme(colors.neutral.300);
+    --controls-bg: var(--color-zinc-800);
+    --control-active-bg: var(--color-orange-600);
+    --control-active-color: var(--color-neutral-300);
     --control-active-border: 0 none;
   }
 }
@@ -74,24 +108,6 @@
   body {
     @apply bg-background text-foreground;
     @apply font-medium;
-  }
-}
-
-@layer utilities {
-  .text-foreground {
-    color: var(--foreground)
-  }
-
-  .bg-foreground {
-    background-color: var(--foreground);
-  }
-
-  .bg-control {
-    background-color: var(--controls-bg);
-  }
-
-  .bg-control-active {
-    background-color: var(--control-active-bg);
   }
 }
 

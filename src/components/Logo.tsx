@@ -1,4 +1,3 @@
-import React from 'react';
 import LogoNewYearSvg from '@/icons/new-year-logo.svg';
 import Link from 'next/link';
 

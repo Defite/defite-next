@@ -23,7 +23,7 @@ export function ThemeToggle() {
   ]
 
   return <Menu as="div" className="relative inline-block">
-    <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-foreground shadow-xs inset-ring-1 inset-ring-gray-300 w-[24px] h-[24px]">
+    <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-foreground shadow-2xs w-[24px] h-[24px] cursor-pointer">
       <SunIcon width={24} height={24} className="transform hover:rotate-90 transition duration-300 dark:invisible absolute top-0 left-0" />
       <MoonIcon width={24} height={24} className="transform hover:rotate-45 hover:scale-125 transition duration-300 invisible dark:visible absolute top-0 left-0 hover:fill-yellow-300 hover:stroke-yellow-300" />
     </MenuButton>

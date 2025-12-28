@@ -12,7 +12,6 @@ const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
 
 /** @type {import('rehype-expressive-code').RehypeExpressiveCodeOptions} */
 const rehypeExpressiveCodeOptions = {
-//  themes: ['dracula', 'solarized-light'],
   themes: ['catppuccin-latte', 'houston'],
   useDarkModeMediaQuery: false,
   themeCssSelector: (theme: { name: string; }) => {
