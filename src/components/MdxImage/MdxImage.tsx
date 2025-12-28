@@ -13,7 +13,7 @@ export function MdxImage(props: Props) {
   return (
     <figure className={style.figure}>
       <Zoom>
-        <Image {...props} alt={alt || caption || 'There was an image here'} />
+        <Image className="rounded-md" {...props} alt={alt || caption || 'There was an image here'} />
       </Zoom>
       {caption ? (
         <figcaption className={style.figcaption}>{caption}</figcaption>
