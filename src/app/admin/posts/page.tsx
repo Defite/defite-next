@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { NextPageWithLayout } from '@/types/index';
+import AdminLayout from '@/layouts/AdminLayout';
 
 interface Post {
   slug: string;
@@ -10,7 +12,7 @@ interface Post {
   description?: string;
 }
 
-export default function AdminPosts() {
+const AdminPosts: NextPageWithLayout = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -162,4 +164,10 @@ export default function AdminPosts() {
       </div>
     </div>
   );
-}
+};
+
+AdminPosts.getLayout = function getLayout(page: React.ReactNode) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
+
+export default AdminPosts;

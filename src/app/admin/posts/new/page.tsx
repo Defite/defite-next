@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import { NextPageWithLayout } from '@/types/index';
+import AdminLayout from '@/layouts/AdminLayout';
 
 interface PostForm {
   slug: string;
@@ -11,7 +13,7 @@ interface PostForm {
   content: string;
 }
 
-export default function NewPost() {
+const NewPost: NextPageWithLayout = () => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [formData, setFormData] = useState<PostForm>({
@@ -199,4 +201,10 @@ export default function NewPost() {
       </form>
     </div>
   );
-}
+};
+
+NewPost.getLayout = function getLayout(page: React.ReactNode) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
+
+export default NewPost;

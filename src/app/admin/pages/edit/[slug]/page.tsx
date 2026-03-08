@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useTransition } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { NextPageWithLayout } from '@/types/index';
+import AdminLayout from '@/layouts/AdminLayout';
 
 interface PageForm {
   slug: string;
@@ -10,7 +12,7 @@ interface PageForm {
   content: string;
 }
 
-export default function EditPage() {
+const EditPage: NextPageWithLayout = () => {
   const router = useRouter();
   const params = useParams();
   const slug = params.slug as string;
@@ -245,4 +247,10 @@ export default function EditPage() {
       </form>
     </div>
   );
-}
+};
+
+EditPage.getLayout = function getLayout(page: React.ReactNode) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
+
+export default EditPage;

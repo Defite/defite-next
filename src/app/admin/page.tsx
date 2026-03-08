@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { NextPageWithLayout } from '@/types/index';
+import AdminLayout from '@/layouts/AdminLayout';
 
 interface Post {
   slug: string;
@@ -21,7 +23,7 @@ interface DashboardData {
   pages: Page[];
 }
 
-export default function AdminDashboard() {
+const AdminDashboard: NextPageWithLayout = () => {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -191,4 +193,10 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-}
+};
+
+AdminDashboard.getLayout = function getLayout(page: React.ReactNode) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
+
+export default AdminDashboard;
