@@ -1,7 +1,9 @@
 .figure img {
-    margin: 0 auto;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
 }
 
 .figcaption {
-    text-align: center;
+  text-align: center;
 }

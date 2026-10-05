@@ -14,9 +14,9 @@ const BLOG_POSTS_PATH = path.join(process.cwd(), 'src', 'content', 'posts');
 const rehypeExpressiveCodeOptions = {
   themes: ['catppuccin-latte', 'houston'],
   useDarkModeMediaQuery: false,
-  themeCssSelector: (theme: { name: string; }) => {
-    return theme.name === 'houston' ? '.dark' : '.light'
-  }
+  themeCssSelector: (theme: { name: string }) => {
+    return theme.name === 'houston' ? '.dark' : '.light';
+  },
 };
 
 const BLOG_POST_IMAGES = path.join(process.cwd(), 'public', 'blog');
@@ -104,6 +104,7 @@ export async function getSingleBlogPost(slug: string) {
     source,
     options: {
       parseFrontmatter: true,
+      blockJS: false,
       mdxOptions: {
         remarkPlugins: [],
         rehypePlugins: [[rehypeExpressiveCode, rehypeExpressiveCodeOptions]],
