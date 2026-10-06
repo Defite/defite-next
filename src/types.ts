@@ -3,6 +3,9 @@ export type Post = {
   title: string;
   description?: string;
   date: string;
+  dateISO?: string;
+  introImage?: string;
+  readingTime?: number;
 };
 
 export type Page = {

@@ -59,6 +59,7 @@ export async function getBlogPosts() {
   const postsPaths = await getMDXFiles(BLOG_POSTS_PATH);
 
   const posts = postsPaths.map(async (postPath) => {
+    const slug = postPath.replace('.mdx', '');
     const source = await fs.readFile(path.join(BLOG_POSTS_PATH, postPath));
     const { frontmatter } = await compileMDX<Post>({
       source,
@@ -69,13 +70,18 @@ export async function getBlogPosts() {
 
     const { title, date, description } = frontmatter;
     const formattedDate = await getDateFormat(date);
+    const postImages = await getPostImages(slug, true);
+    const introImage = postImages.find((filename) => filename === 'intro.avif');
 
     return {
-      slug: postPath.replace('.mdx', ''),
+      slug,
       title,
       description,
       date: formattedDate,
+      dateISO: date,
       createdDate: +new Date(date),
+      readingTime: getReadingTime(source),
+      introImage: introImage ? `/blog/${slug}/${introImage}` : undefined,
     };
   });
 
@@ -120,9 +126,29 @@ export async function getSingleBlogPost(slug: string) {
     title,
     description,
     date: formattedDate,
+    dateISO: date,
+    readingTime: getReadingTime(source),
     content,
     introImage: introImagePath,
   };
+}
+
+/**
+ * Rough reading time in whole minutes, estimated from the raw MDX source.
+ * Strips frontmatter, fenced code and JSX tags first so they don't inflate
+ * the word count.
+ */
+function getReadingTime(source: Buffer, wordsPerMinute = 200) {
+  const text = source
+    .toString()
+    .replace(/^---[\s\S]*?---/, ' ')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/[#*_`>[\]()|-]/g, ' ');
+
+  const words = text.split(/\s+/).filter(Boolean).length;
+
+  return Math.max(1, Math.round(words / wordsPerMinute));
 }
 
 export async function getPagesSlugs() {

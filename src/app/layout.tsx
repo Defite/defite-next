@@ -1,12 +1,19 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Google_Sans } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const inter = Inter({ subsets: ['latin'] });
+// Google Sans is variable from 400 to 700 — 700 is the heaviest weight it has.
+const sans = Google_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+  adjustFontFallback: false,
+  fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+});
 
 export const metadata: Metadata = {
   title: 'Nikita Makhov — Front-end web developer',
@@ -19,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning className="">
-      <body className={inter.className}>
+    <html lang='en' suppressHydrationWarning className=''>
+      <body className={`${sans.variable} font-sans`}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
