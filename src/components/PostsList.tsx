@@ -19,17 +19,24 @@ export const PostsList: FC<Props> = ({ title, posts }) => {
           <li key={index}>
             <Link
               href={`/blog/${post.slug}`}
-              className='-mx-3 flex gap-9 rounded-md px-3 py-2 transition-colors duration-200 hover:bg-control dark:hover:bg-neutral-800'
+              className='hover:bg-control -mx-3 flex justify-between gap-9 rounded-md px-3 py-2 transition-colors duration-200 dark:hover:bg-neutral-800'
             >
-              <span className='shrink-0 grow-0 basis-28'>{post.date}</span>
               <span>
-                <span className='color-primary'>{post.title}</span>
+                <span>
+                  {String(posts.length - index - 1)
+                    .padStart(2, '0')
+                    .padEnd(3, '.')}
+                  &nbsp;&nbsp;
+                  <span className='color-primary'>{post.title}</span>
+                </span>
                 {post.description ? (
-                  <>
-                    <span className='mx-2'>&#8212;</span>
+                  <div>
                     <span className='text-sm'>{post.description}</span>
-                  </>
+                  </div>
                 ) : null}
+              </span>
+              <span className='shrink-0 grow-0 basis-28 text-right text-sm'>
+                {post.date}
               </span>
             </Link>
           </li>

@@ -5,9 +5,9 @@ import { getBlogPosts } from '@/utils';
 
 export default async function Home() {
   const posts = await getBlogPosts();
-  
+
   return (
-    <main className='wrapper mx-auto flex flex-col gap-20 px-3 py-16 lg:px-0'>
+    <main className='mx-auto flex max-w-2xl flex-col gap-20 px-3 py-16 lg:px-0'>
       <Hero />
       <PostsList title='Recent posts' posts={posts} />
       <GithubActivity />

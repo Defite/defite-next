@@ -17,7 +17,7 @@ export default async function GenericPage(props: Props) {
   const { title, content } = page;
 
   return (
-    <main className='wrapper mx-auto px-3 pt-16 lg:px-0'>
+    <main className='mx-auto max-w-2xl px-3 pt-16 lg:px-0'>
       <h1 className='color-primary'>{title}</h1>
       {content}
     </main>
@@ -31,4 +31,3 @@ export async function generateStaticParams() {
     slug: page.slug,
   }));
 }
-

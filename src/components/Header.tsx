@@ -11,7 +11,7 @@ export const Header = () => {
   const { activeIndex, setActiveIndex } = useHeaderMenu();
 
   return (
-    <header className='wrapper mx-auto'>
+    <header className='mx-auto max-w-2xl'>
       <div className='flex items-center justify-between px-3 py-5 lg:px-0'>
         <Logo />
         <SegmentedNavControl

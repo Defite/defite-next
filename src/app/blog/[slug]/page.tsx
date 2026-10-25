@@ -31,9 +31,7 @@ function PostHeader({
     <header className={overlay ? undefined : 'mb-10'}>
       <div
         className={`mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold tracking-[0.16em] uppercase ${
-          overlay
-            ? 'text-white/70'
-            : 'text-neutral-500 dark:text-neutral-400'
+          overlay ? 'text-white/70' : 'text-neutral-500 dark:text-neutral-400'
         }`}
       >
         <span
@@ -51,7 +49,7 @@ function PostHeader({
       </div>
 
       <h1
-        className={`font-bold text-3xl leading-[1.05] tracking-tight text-balance sm:text-4xl lg:text-5xl ${
+        className={`text-3xl leading-[1.05] font-bold tracking-tight text-balance sm:text-4xl lg:text-4xl ${
           overlay ? 'text-white' : 'text-neutral-900 dark:text-neutral-100'
         }`}
       >
@@ -92,13 +90,13 @@ export default async function Post(props: Props) {
 
   return (
     <main
-      className={`wrapper mx-auto px-3 lg:px-0 ${
+      className={`mx-auto max-w-2xl px-3 lg:px-0 ${
         introImage ? 'pt-8 pb-16' : 'py-16'
       }`}
     >
       <article className='text-neutral-700 dark:text-neutral-300'>
         {introImage ? (
-          <section className='relative isolate mb-10 flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-2xl sm:min-h-[26rem]'>
+          <section className='relative isolate -mx-5 mb-10 flex min-h-88 flex-col justify-end overflow-hidden rounded-2xl sm:min-h-104'>
             <Image
               src={imageWithPlaceholder.src}
               alt={title}
@@ -109,8 +107,8 @@ export default async function Post(props: Props) {
               blurDataURL={imageWithPlaceholder.placeholder}
               priority
             />
-            <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/10' />
-            <div className='relative p-6 sm:p-10'>
+            <div className='absolute inset-0 bg-linear-to-t from-black/90 via-black/55 to-black/10' />
+            <div className='relative p-6 sm:p-4'>
               <PostHeader
                 title={title}
                 description={description}

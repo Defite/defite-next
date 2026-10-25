@@ -107,16 +107,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    @apply font-medium;
   }
 }
 
 html {
   scrollbar-gutter: stable;
-}
-
-.wrapper {
-  max-width: 850px;
 }
 
 .color-primary {
@@ -135,6 +130,6 @@ html {
   border-bottom: none;
 }
 
-dialog [data-rmiz-modal-overlay="visible"] {
+dialog [data-rmiz-modal-overlay='visible'] {
   background-color: var(--background);
 }
